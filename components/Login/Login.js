@@ -1,9 +1,22 @@
 import React from 'react';
 import { Container, Header, Content, Form, Item, Input, Button } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView,
+    Button,
+    KeyboardAvoidingView,
+    ActivityIndicator,
+    Alert, } from 'react-native';
 import IntroAnimation from '../../components/introAnimation/IntroAnimation';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 class Login extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            email: '',
+            password: ''
+        }
+    }
     pressGuest = () => {
         this.props.navigation.navigate('Home');
     }
@@ -20,7 +33,7 @@ class Login extends React.Component {
                     <View style={styles.subcontainer}>
                         <Form>
                             <Item>
-                                <Input placeholder="Username" />
+                                <Input placeholder="Email" />
                             </Item>
                             <Item>
                                 <Input placeholder="Password" />
@@ -30,17 +43,6 @@ class Login extends React.Component {
                             <Text>Login as Guest</Text>
                         </Button>
                     </View>
-                    {/* <Form>
-                        <Item>
-                            <Input placeholder="Username" />
-                        </Item>
-                        <Item>
-                            <Input placeholder="Password" />
-                        </Item>
-                    </Form>
-                    <Button block style={styles.subcontainer}>
-                        <Text>Login as Guest</Text>
-                    </Button> */}
                 </Content>
             </Container>
         );
