@@ -1,13 +1,7 @@
 import React from 'react';
 import { Container, Header, Content, Form, Item, Input, Button } from 'native-base';
-import { StyleSheet, Text, View, SafeAreaView,
-    Button,
-    KeyboardAvoidingView,
-    ActivityIndicator,
-    Alert, } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, ActivityIndicator, Alert } from 'react-native';
 import IntroAnimation from '../../components/introAnimation/IntroAnimation';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 
 class Login extends React.Component {
     constructor(props){
@@ -20,6 +14,13 @@ class Login extends React.Component {
     pressGuest = () => {
         this.props.navigation.navigate('Home');
     }
+    onChangeEmail = (emailEntry) => {
+        this.setState({email: emailEntry });
+    }
+    onChangePassword = (pwEntry) => {
+        this.setState({password: pwEntry});
+    }
+
 
     render(){
         return(
@@ -33,12 +34,22 @@ class Login extends React.Component {
                     <View style={styles.subcontainer}>
                         <Form>
                             <Item>
-                                <Input placeholder="Email" />
+                                <Input placeholder="Email" 
+                                    onChangeText={this.onChangeEmail}
+                                    value={this.state.email}
+                                />
                             </Item>
                             <Item>
-                                <Input placeholder="Password" />
+                                <Input placeholder="Password"
+                                    onChangeText={this.onChangePassword}
+                                    value={this.state.password}
+                                    secureTextEntry 
+                                />
                             </Item>
                         </Form>
+                        <Button block >
+                            <Text>Login</Text>
+                        </Button>
                         <Button block onPress={this.pressGuest}>
                             <Text>Login as Guest</Text>
                         </Button>
@@ -49,7 +60,8 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+
+export default Login ;
 
 const styles = StyleSheet.create({
     container: {
